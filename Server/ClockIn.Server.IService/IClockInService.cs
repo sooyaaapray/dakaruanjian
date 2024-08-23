@@ -9,6 +9,6 @@ namespace ClockIn.Server.IService
 {
     public interface IClockInService : IServiceBase
     {
-        public int ClockIn(int user_id, state_Type _state_Type);//打卡，返回打卡结果
+        public int ClockIn(int user_id, state_Type _state_Type,string upTime);//打卡，返回打卡结果
     }
 }

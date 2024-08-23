@@ -1,4 +1,5 @@
-﻿using ClockIn.Client.Entity;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.Entity;
 using ClockIn.Client.IDAL;
 using Microsoft.VisualBasic;
 using System;
@@ -17,7 +18,7 @@ namespace ClockIn.Client.DAL
             _webDataBase = webDataBase;
         }
 
-        public Task<string> GetAllUser(UserEntity CurUserEntity)
+        public Task<ResultData> GetAllUser(UserEntity CurUserEntity)
         {
             Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
             contents.Add("is_admin", new StringContent(CurUserEntity.is_admin.ToString()));
@@ -25,7 +26,7 @@ namespace ClockIn.Client.DAL
             return _webDataBase.PostDatas("api/user/getalluser", contents);
         }
 
-        public Task<string> UpdateInfo(UserEntity TargetUserEntity, UserEntity CurUserEntity)
+        public Task<ResultData> UpdateInfo(UserEntity TargetUserEntity, UserEntity CurUserEntity)
         {
             Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
             contents.Add("is_admin", new StringContent(CurUserEntity.is_admin.ToString()));

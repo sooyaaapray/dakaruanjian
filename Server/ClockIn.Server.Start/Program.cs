@@ -11,6 +11,10 @@ builder.Services.AddTransient<ClockIn.Server.IConfiguration.IConfiguration, Cloc
 builder.Services.AddTransient<ClockIn.Server.IEFContext.IEFContext, ClockIn.Server.EFContext.EFContext>();
 builder.Services.AddTransient<ClockIn.Server.IService.ILoginService, ClockIn.Server.Service.LoginService>();
 builder.Services.AddTransient<ClockIn.Server.IService.IMenuService, ClockIn.Server.Service.MenuService>();
+
+builder.Services.AddTransient<ClockIn.Server.IService.IClockInService, ClockIn.Server.Service.ClockInService>();
+builder.Services.AddTransient<ClockIn.Server.IService.ILeaveService, ClockIn.Server.Service.LeaveService>();
+builder.Services.AddTransient<ClockIn.Server.IService.ICheckService, ClockIn.Server.Service.CheckService>();
 builder.Services.AddTransient<ClockIn.Server.IService.IUpdateUserService, ClockIn.Server.Service.UpdateUserService>();
 builder.Services.AddControllers();
 

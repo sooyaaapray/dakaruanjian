@@ -51,7 +51,7 @@
             </Grid>
             <!--Data Grid-->
             <DataGrid Grid.Row="2" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
-              x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+              ItemsSource="{Binding members}" Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                         <DataGridCheckBoxColumn.HeaderTemplate>
@@ -61,7 +61,7 @@
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
                     <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding User_id}"/>
-                    <DataGridTemplateColumn Header="Name"  IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn Header="用户名"  IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -74,16 +74,20 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Role" Binding="{Binding User_role}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Leader" Binding="{Binding User_role}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="角色" Binding="{Binding User_role}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="IP" Binding="{Binding User_ip_address}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}">
+                                    <Button Style="{StaticResource gridEditButton}"
+                                            Command="{Binding DataContext.ItemUpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding User_id}">
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
-                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
+                                            Command="{Binding DataContext.ItemDeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding User_id}">
                                         <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

@@ -1,4 +1,5 @@
-﻿using ClockIn.Client.Entity;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.Entity;
 using ClockIn.Client.IBLL;
 using ClockIn.Client.IDAL;
 using System;
@@ -16,12 +17,33 @@ namespace ClockIn.Client.BLL
         {
             _getAllDAL = getAllDAL;
         }
-        public async Task<string> GetAll() 
+
+        public async Task<List<UserEntity>> GetAll() 
         {
-            string restult = await _getAllDAL.getAll();
-         
-            //UserEntity userEntity = Newtonsoft.Json.JsonConvert.DeserializeObject<UserEntity>(result);
-            return restult;
+            ResultData result = await _getAllDAL.getAll();
+            if ((int)result.StatusCode == 200) {
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<UserEntity>>(result.Result);
+            }
+            throw new Exception(result.StatusCode + result.Result);
+        }
+
+        public async Task<UserEntity> GetUserById(int id)
+        {
+            ResultData result = await _getAllDAL.getUserById(id);
+            if ((int)result.StatusCode == 200) {
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<UserEntity>(result.Result);
+            }
+            throw new Exception(result.StatusCode + result.Result);
+        }
+
+        public async Task<int> DeleteUserById(int id)
+        {
+            ResultData result = await _getAllDAL.deleteUserById(id);
+            if ((int)result.StatusCode == 200)
+            {
+                return Convert.ToInt32(result.Result);
+            }
+            throw new Exception(result.StatusCode + result.Result);
         }
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClockIn.Client.Entity
+namespace ClockIn.Client.BaseModule.CShows
 {
-    public class CShowMessage
+    public class CShowEvents
     {
-
     }
 }

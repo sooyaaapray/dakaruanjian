@@ -1,4 +1,7 @@
-﻿using ClockIn.Client.IDAL;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.Entity;
+using ClockIn.Client.IDAL;
+using Microsoft.VisualBasic;
 
 namespace ClockIn.Client.DAL
 {
@@ -11,9 +14,25 @@ namespace ClockIn.Client.DAL
             _webDataBase = webDataBase;
         }
 
-        public Task<string> getAll()
+        public Task<ResultData> deleteUserById(int id)
         {
-            return _webDataBase.PostDatas("api/user/getAllLeave", null);
+            Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
+            contents.Add("id", new StringContent(id.ToString()));
+            return _webDataBase.PostDatas("api/user/deleteuserById", contents);
+        }
+
+        public Task<ResultData> getAll()
+        {
+            Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
+            contents.Add("isAdmin", new StringContent(CLoginUser._user_instance().Is_admin.ToString()));
+            return _webDataBase.PostDatas("api/user/getall", contents);
+        }
+
+        public Task<ResultData> getUserById(int id)
+        {
+            Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
+            contents.Add("id", new StringContent(id.ToString()));
+            return _webDataBase.PostDatas("api/user/getuserById", contents);
         }
     }
 }

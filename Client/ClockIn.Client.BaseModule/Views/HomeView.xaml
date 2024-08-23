@@ -36,7 +36,7 @@
                             <RotateTransform Angle="90" />
                         </Separator.LayoutTransform>
                     </Separator>
-                    <TextBlock x:Name="time_lable_box" Text="00:00:00" Style="{StaticResource statetxt}"/>
+                    <TextBlock  Text="{Binding currentTime,Mode=TwoWay}" Style="{StaticResource statetxt}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -46,7 +46,7 @@
                             <RotateTransform Angle="90" />
                         </Separator.LayoutTransform>
                     </Separator>
-                    <TextBlock x:Name="timezone_lable_box" Text="Asia" Style="{StaticResource statetxt}"/>
+                    <TextBlock Text="{Binding current_timezone}" Style="{StaticResource statetxt}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -56,7 +56,7 @@
                             <RotateTransform Angle="90" />
                         </Separator.LayoutTransform>
                     </Separator>
-                    <TextBlock x:Name="ip_lable_box" Text="192.168.0.1" Style="{StaticResource statetxt}"/>
+                    <TextBlock x:Name="ip_lable_box" Text="{Binding curr_user_ip}" Style="{StaticResource statetxt}"/>
                 </StackPanel>
             </Grid>
         </Border>

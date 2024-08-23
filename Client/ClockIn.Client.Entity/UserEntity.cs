@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ClockIn.Client.Entity
+﻿namespace ClockIn.Client.Entity
 {
     public class UserEntity
     {

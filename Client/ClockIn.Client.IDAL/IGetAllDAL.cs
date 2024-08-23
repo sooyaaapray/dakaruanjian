@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClockIn.Client.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace ClockIn.Client.IDAL
 {
     public interface IGetAllDAL
     {
-        Task<string> getAll();
+        Task<ResultData> getAll();
+        Task<ResultData> getUserById(int id);
+        Task<ResultData> deleteUserById(int id);
     }
 }

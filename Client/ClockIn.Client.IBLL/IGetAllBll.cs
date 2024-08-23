@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClockIn.Client.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace ClockIn.Client.IBLL
 {
     public interface IGetAllBll
     {
-        Task<string> GetAll();
+        Task<List<UserEntity>> GetAll();
+        Task<UserEntity> GetUserById(int id);
+        Task<int> DeleteUserById(int id);
     }
 }

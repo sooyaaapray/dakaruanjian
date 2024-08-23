@@ -1,4 +1,5 @@
-﻿using ClockIn.Client.IDAL;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace ClockIn.Client.DAL
             _webDataBase = webDataBase;
         }
 
-        public Task<string> getAllMessage()
+        public Task<ResultData> getAllMessage()
         {
             return _webDataBase.PostDatas("api/leave/AskForLeave", null);
         }

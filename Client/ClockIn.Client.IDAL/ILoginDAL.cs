@@ -1,7 +1,9 @@
-﻿namespace ClockIn.Client.IDAL
+﻿using ClockIn.Client.Common;
+
+namespace ClockIn.Client.IDAL
 {
     public interface ILoginDAL
     {
-        Task<string> Login(string username, string password);
+        Task<ResultData> Login(string username, string password);
     }
 }

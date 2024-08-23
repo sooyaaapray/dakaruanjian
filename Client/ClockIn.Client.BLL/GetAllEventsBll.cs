@@ -1,4 +1,5 @@
-﻿using ClockIn.Client.IBLL;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.IBLL;
 using ClockIn.Client.IDAL;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace ClockIn.Client.BLL
         {
             _getAllEventsDAL = _getAllEventsDAL;
         }
-        public Task<string> getAllEvents()
+        public Task<ResultData> getAllEvents()
         {
            return _getAllEventsDAL.getAllEvents();
         }

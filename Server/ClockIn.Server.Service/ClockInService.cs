@@ -18,19 +18,30 @@ namespace ClockIn.Server.Service
             _context = eFContext.CreateDBContext();
         }
 
-        public int ClockIn(int user_id, state_Type _state_Type)
+        public int ClockIn(int user_id, state_Type _state_Type,string upTime)
         {
-            ClockInInfo ci = new ClockInInfo();
-            ci.user_id = user_id;
-            ci.record_code = _state_Type;
-            ci.record_date = DateTime.Now;
-            if (Insert<ClockInInfo>(ci) != null)
+            DateTime clientTime = Convert.ToDateTime(upTime);
+            DateTime now = DateTime.Now;
+            if (clientTime.AddSeconds(20) >= now || clientTime.AddSeconds(-20) <= now)
             {
-                return 0;
+                ClockInInfo ci = new ClockInInfo();
+                ci.user_id = user_id;
+                ci.record_code = _state_Type;
+                ci.record_date = now;
+                if (Insert<ClockInInfo>(ci) != null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
             }
             else {
-                return 1;
+                //客户端时间错误,不能打卡
+                return 2;
             }
+            
         }
     }
 }

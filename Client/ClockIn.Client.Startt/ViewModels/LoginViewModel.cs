@@ -1,10 +1,12 @@
 ﻿using ClockIn.Client.BLL;
 using ClockIn.Client.Entity;
 using ClockIn.Client.IBLL;
+using ClockIn.Client.Startt.Base;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows;
 using System.Windows.Input;
+using ToastNotifications.Messages;
 
 namespace ClockIn.Client.Startt.ViewModels
 {
@@ -12,10 +14,11 @@ namespace ClockIn.Client.Startt.ViewModels
     public class LogViewModel : BindableBase
     {
         ILoginBll _iloginBll;
-
+        //Notif _notif;
         public LogViewModel(LoginBll loginBll)
         {
             _iloginBll = loginBll;
+            //_notif = new Notif();
         }
         public string _Password;
         public string Password
@@ -31,13 +34,6 @@ namespace ClockIn.Client.Startt.ViewModels
             set { SetProperty<string>(ref _Userlogname, value); }
         }
 
-        public string _errorMsg;
-        public string errorMsg
-        {
-            get { return _errorMsg; }
-            set { SetProperty<string>(ref _errorMsg, value); }
-        }
-
         public ICommand logButtonCommand
         {
             get => new DelegateCommand<object>(OnLogin);
@@ -49,13 +45,11 @@ namespace ClockIn.Client.Startt.ViewModels
             {
                 if (string.IsNullOrEmpty(this._Userlogname))
                 {
-                    this.errorMsg = "登录失败，请输入登录名";
-                    return;
+                    throw new Exception("登录失败，请输入登录名");
                 }
                 if (string.IsNullOrEmpty(this.Password))
                 {
-                    this.errorMsg = "登录失败，请输入密码";
-                    return;
+                    throw new Exception("登录失败，请输入密码");
                 }
                 UserEntity ue = _iloginBll.Login(this.Userlogname, this.Password).GetAwaiter().GetResult();
 
@@ -81,12 +75,12 @@ namespace ClockIn.Client.Startt.ViewModels
                 else
                 {
                     //登录失败
-                    this.errorMsg = "登录失败，请检查登录名或密码是否正确";
+                    throw new Exception("登录失败，请检查登录名或密码是否正确");
                 }
             }
             catch (Exception ex)
             {
-                this.errorMsg = "登录失败，"+ex.Message;
+                //_notif.notifier.ShowInformation(ex.Message);
             }
 }
     }

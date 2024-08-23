@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClockIn.Client.Common\ClockIn.Client.Common.csproj" />
     <ProjectReference Include="..\ClockIn.Client.Entity\ClockIn.Client.Entity.csproj" />
     <ProjectReference Include="..\ClockIn.Client.IBLL\ClockIn.Client.IBLL.csproj" />
     <ProjectReference Include="..\ClockIn.Client.IDAL\ClockIn.Client.IDAL.csproj" />

@@ -1,4 +1,5 @@
-﻿using ClockIn.Client.Entity;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.Entity;
 using ClockIn.Client.IBLL;
 using ClockIn.Client.IDAL;
 using System.Text.Json;
@@ -14,29 +15,21 @@ namespace ClockIn.Client.BLL
         }
         public async Task<UserEntity> Login(string un, string pwd)
         {
-            // 将DAL返回的Json字符串    反序列化成   直接对象
-            string result = await _loginDAL.Login(un, pwd);
+            ResultData result = await _loginDAL.Login(un, pwd);
 
-            //ResultEntity<List<string>>
-            UserEntity userEntity = Newtonsoft.Json.JsonConvert.DeserializeObject<UserEntity>(result);
-
-            return userEntity;
-
-
-            /*ResultEntity<UserEntity> re = JsonSerializer.Deserialize<ResultEntity<UserEntity>>(result);
-            if (re != null)
+            if (result != null)
             {
-                if (re.state == 200)
+                if ((int)result.StatusCode == 200)
                 {
-                    return re.data;
+                    UserEntity userEntity = Newtonsoft.Json.JsonConvert.DeserializeObject<UserEntity>(result._resultData);
+                    return userEntity;
                 }
-                else
-                {
-                    // 记录日志   异常码   500     501   其他错
-                    throw new Exception(re.exceptionMessage);
-                }
-            }*/
-            //return null;
+            }
+            else 
+            {
+                throw new Exception(result.StatusCode.ToString() + result._resultData);
+            }
+            return null;
         }
     }
 

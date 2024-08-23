@@ -23,6 +23,9 @@ namespace ClockIn.Client.Startt.Base
                     maximumNotificationCount: MaximumNotificationCount.FromCount(5));
 
                 cfg.Dispatcher = Application.Current.Dispatcher;
+
+                cfg.DisplayOptions.TopMost = false;
+                cfg.DisplayOptions.Width = 250;
             });
         }
     }

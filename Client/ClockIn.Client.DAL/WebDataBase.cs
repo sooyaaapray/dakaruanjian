@@ -15,12 +15,13 @@ namespace ClockIn.Client.DAL
     {
         private readonly string domain = "http://localhost:5260/";
 
-        public Task<string> PostDatas(string uri, Dictionary<string,HttpContent> contents)
+        public async Task<ResultData> PostDatas(string uri, Dictionary<string,HttpContent> contents)
         {
             using (HttpClient client = new HttpClient())
             {
                 var resp = client.PostAsync($"{domain}{uri}", this.GetFormData(contents)).GetAwaiter().GetResult();
-                return resp.Content.ReadAsStringAsync();
+                ResultData res = new ResultData(await resp.Content.ReadAsStringAsync(),resp.StatusCode);
+                return res;
             }
         }
 
@@ -42,12 +43,13 @@ namespace ClockIn.Client.DAL
 
         // Get方式进行请求
 
-        public Task<string> GetDatas(string uri)
+        public async Task<ResultData> GetDatas(string uri)
         {
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync($"{domain}{uri}").GetAwaiter().GetResult();
-                return resp.Content.ReadAsStringAsync();
+                var res = new ResultData(await resp.Content.ReadAsStringAsync(), resp.StatusCode);
+                return res;
             }
         }
     }

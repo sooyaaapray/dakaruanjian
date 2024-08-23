@@ -1,4 +1,5 @@
-﻿using ClockIn.Client.IDAL;
+﻿using ClockIn.Client.Common;
+using ClockIn.Client.IDAL;
 
 namespace ClockIn.Client.DAL
 {
@@ -11,7 +12,7 @@ namespace ClockIn.Client.DAL
             _webDataBase = webDataBase;
         }
 
-        public Task<string> Login(string username, string password)
+        public Task<ResultData> Login(string username, string password)
         {
             Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
             contents.Add("userlogname", new StringContent(username));

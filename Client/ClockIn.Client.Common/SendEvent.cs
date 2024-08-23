@@ -1,14 +1,14 @@
 ﻿using ClockIn.Client.Entity;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClockIn.Client.IBLL
+namespace ClockIn.Client.Common
 {
-    public interface IClockInBll
+    public class SendEvent:PubSubEvent<UserEntity>
     {
-        Task<int> ClockIn(int ctype);
     }
 }

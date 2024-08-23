@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClockIn.Client.Common\ClockIn.Client.Common.csproj" />
     <ProjectReference Include="..\ClockIn.Client.Entity\ClockIn.Client.Entity.csproj" />
   </ItemGroup>
 

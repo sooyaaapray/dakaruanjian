@@ -57,17 +57,46 @@ namespace ClockIn.Server.Start.Controllers
             return BitConverter.ToString(outt).Replace("-", "");
         }
 
-        [HttpGet("getalluser")]
-        public IActionResult getall()
+        [HttpPost("getall")]
+        public IActionResult getall([FromForm]string isAdmin)
         {
-            var users = _updateUserService.GetAllUser();
-            if (users?.Count() > 0)
-            {
+            if (Convert.ToBoolean(isAdmin) == true) {
+                var users = _updateUserService.GetAllUser();
                 return Ok(users);
             }
             else
             {
                 return NoContent();
+            }
+        }
+
+        [HttpPost("getuserById")]
+        public IActionResult updateUser([FromForm] string id)
+        {
+            var user = _updateUserService.Query<SysUserInfo>(u => u.user_id == Convert.ToInt32(id));
+            if (user?.Count() > 0)
+            {
+                var cuser = user.ToList()[0];
+                return Ok(cuser);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpPost("deleteuserById")]
+        public IActionResult deleteUser([FromForm] string id)
+        {
+            var user = _updateUserService.Find<SysUserInfo>(Convert.ToInt32(id));
+            if (user != null) {
+                user.is_active = false;
+                _updateUserService.Update<SysUserInfo>(user);
+                return Ok(0);//删除成功
+            }
+            else
+            {
+                return Ok(0);//删除失败
             }
         }
 
@@ -85,8 +114,8 @@ namespace ClockIn.Server.Start.Controllers
             }
         }
 
-        [HttpGet("insert")]
-        public IActionResult insertUser([FromBody] SysUserInfo cuser)
+        [HttpPost("insert")]
+        public IActionResult insertUser([FromBody]SysUserInfo cuser)
         {
             var users = _updateUserService.GetAllUser();
             if (users?.Count() > 0)

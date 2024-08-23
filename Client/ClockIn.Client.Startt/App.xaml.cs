@@ -6,8 +6,10 @@ using ClockIn.Client.IDAL;
 using ClockIn.Client.MainMoudels.Models;
 using ClockIn.Client.MainMoudels.ViewModels;
 using ClockIn.Client.MainMoudels.Views;
+using ClockIn.Client.Startt.Base;
 using ClockIn.Client.Startt.ViewModels;
 using ClockIn.Client.Startt.Views;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -40,6 +42,8 @@ namespace ClockIn.Client.Startt
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //containerRegistry.Register<NotificationContainer, NotificationContainer>();
+            containerRegistry.Register<IEventAggregator, EventAggregator>();
+
 
 
             containerRegistry.Register<IWebDataBase, WebDataBase>();

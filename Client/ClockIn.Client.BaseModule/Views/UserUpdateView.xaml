@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="用户名:" VerticalAlignment="Center" x:Name="user_name_update" Style="{StaticResource textupdateHint}" Margin="10,0,0,0"/>
-                        <TextBox Grid.Column="1" x:Name="user_name_update_box" Height="40" Margin="10,0,0,0"/>
+                        <TextBox Grid.Column="1" Text="{Binding UserForUpdate.User_name}" Height="40" Margin="10,0,0,0"/>
                     </Grid>
 
                     <Grid Margin="7 9">

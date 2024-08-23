@@ -23,14 +23,12 @@ namespace ClockIn.Server.Start.Controllers
         }
 
         //打卡 ClockInService
-
+        [AllowAnonymous]
         [HttpPost("clockin")]
-        public IActionResult Clockin(int user_id,int code)
+        public IActionResult Clockin([FromForm]string user_id, [FromForm] string code, [FromForm]string upTime)
         {
-            if (_clockInService.ClockIn(user_id, (state_Type)code) == 0) {
-
-                return Ok();
-            }return Ok();
+            int ret = _clockInService.ClockIn(Convert.ToInt32(user_id), (state_Type)Convert.ToInt32(code), upTime);
+            return Ok(ret);
         }
 
         //获取所有请假信息

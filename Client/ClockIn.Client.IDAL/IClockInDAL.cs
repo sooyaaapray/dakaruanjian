@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClockIn.Client.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ClockIn.Client.IDAL
 {
     public interface IClockInDAL
     {
-        Task<string> ClockIn(int ctype,int user_id);
+        Task<ResultData> ClockIn(int ctype,int user_id);
     }
 }

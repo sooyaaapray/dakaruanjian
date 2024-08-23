@@ -26,7 +26,7 @@ namespace ClockIn.Server.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(_connstr, new MySqlServerVersion(new Version(8, 4, 0)));
+            optionsBuilder.UseMySql(_connstr, new MySqlServerVersion(new Version(8, 0, 17)));
         }
         public DbSet<SysUserInfo> SysUserInfo { get; set; }
         public DbSet<MenuInfo> MenuInfo { get; set; }
