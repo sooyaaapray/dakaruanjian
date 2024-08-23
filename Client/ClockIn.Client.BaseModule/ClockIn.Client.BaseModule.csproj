@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.30" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Moudles\" />
+    <Folder Include="Moudles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClockIn.Client.Controls\ClockIn.Client.Controls.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.BLL\ClockIn.Client.BLL.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.Common\ClockIn.Client.Common.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.Entity\ClockIn.Client.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.30" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="Prism.Unity" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="ToastNotifications" Version="2.5.1" />
+    <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClockIn.Client.Controls\ClockIn.Client.Controls.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.BaseModule\ClockIn.Client.BaseModule.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.BLL\ClockIn.Client.BLL.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.DAL\ClockIn.Client.DAL.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.IBLL\ClockIn.Client.IBLL.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.IDAL\ClockIn.Client.IDAL.csproj" />
+    <ProjectReference Include="..\ClockIn.Client.MainMoudels\ClockIn.Client.MainMoudels.csproj" />
+  </ItemGroup>
+
+</Project>

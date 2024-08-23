@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClockIn.Server.Configuration\ClockIn.Server.Configuration.csproj" />
+    <ProjectReference Include="..\ClockIn.Server.EFContext\ClockIn.Server.EFContext.csproj" />
+    <ProjectReference Include="..\ClockIn.Server.IEFContext\ClockIn.Server.IEFContext.csproj" />
+    <ProjectReference Include="..\ClockIn.Server.IService\ClockIn.Server.IService.csproj" />
+    <ProjectReference Include="..\ClockIn.Server.Models\ClockIn.Server.Models.csproj" />
+    <ProjectReference Include="..\ClockIn.Server.Service\ClockIn.Server.Service.csproj" />
+  </ItemGroup>
+
+</Project>

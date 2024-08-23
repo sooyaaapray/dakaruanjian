@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="ClockIn.Client.BaseModule.Views.UserUpdateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClockIn.Client.BaseModule.Views"
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="新增更改人员信息"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0">
+                <StackPanel  VerticalAlignment="Center">
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="用户名:" VerticalAlignment="Center" x:Name="user_name_update" Style="{StaticResource textupdateHint}" Margin="10,0,0,0"/>
+                        <TextBox Grid.Column="1" x:Name="user_name_update_box" Height="40" Margin="10,0,0,0"/>
+                    </Grid>
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="用户密码:" VerticalAlignment="Center" x:Name="user_pwd_update" Style="{StaticResource textupdateHint}"/>
+                        <TextBox Grid.Column="1" x:Name="user_pwd_update_box" Height="40" Margin="10,0,0,0"/>
+                    </Grid>
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="IP:" VerticalAlignment="Center" x:Name="user_ip_update" Style="{StaticResource textupdateHint}"/>
+                        <TextBox Grid.Column="1" x:Name="user_ip_update_box" Height="40" Margin="10,0,0,0"/>
+                    </Grid>
+
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="MAC:" VerticalAlignment="Center"  x:Name="user_mac_update" Style="{StaticResource textupdateHint}"/>
+                        <TextBox Grid.Column="1" x:Name="user_mac_update_box" Height="40" Margin="10,0,0,0"/>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" CornerRadius="0 10 10 0">
+                <StackPanel  VerticalAlignment="Center">
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="登录名:" VerticalAlignment="Center" x:Name="user_logname_update" Style="{StaticResource textupdateHint}"/>
+                        <TextBox Grid.Column="1" Height="40" x:Name="user_logname_update_box" Margin="10,0,0,0"/>
+                    </Grid>
+
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="角色:" VerticalAlignment="Center" x:Name="user_role_update" Style="{StaticResource textupdateHint}"/>
+                        <ComboBox x:Name="user_role_update_box" Grid.Column="1" Height="40" Margin="10,0,0,0">
+                            <ComboBoxItem Content="管理员"/>
+                            <ComboBoxItem Content="员工" IsSelected="True"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="管理员:" VerticalAlignment="Center" x:Name="user_isadmin_update" Style="{StaticResource textupdateHint}"/>
+                        <ComboBox x:Name="user_isadmin_update_box" Grid.Column="1" Height="40" Margin="10,0,0,0">
+                            <ComboBoxItem Content="是"/>
+                            <ComboBoxItem Content="否" IsSelected="True"/>
+                        </ComboBox>
+                    </Grid>
+
+
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="在职:" VerticalAlignment="Center" x:Name="user_active_update" Style="{StaticResource textupdateHint}"/>
+                        <ComboBox x:Name="user_isactive_update_box" Grid.Column="1" Height="40" Margin="10,0,0,0">
+                            <ComboBoxItem Content="是"/>
+                            <ComboBoxItem Content="否" IsSelected="True"/>
+                        </ComboBox>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="上班打卡:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ui:TimePicker />
+                    <TextBlock Text="下班打卡:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ui:TimePicker />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="开始吃饭打卡:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ui:TimePicker />
+                    <TextBlock Text="结束吃饭打卡:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ui:TimePicker />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Border Grid.Row="3">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <Button Content="取消"/>
+                <Button Content="保存"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
