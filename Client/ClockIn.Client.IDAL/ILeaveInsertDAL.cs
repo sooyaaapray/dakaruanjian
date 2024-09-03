@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace ClockIn.Client.IDAL
 {
-    public interface IUserUpdateDAL
+    public interface ILeaveInsertDAL
     {
-        Task<ResultData> UpdateInfo(string select_user);
-        Task<ResultData> insertUser(string user);
-        Task<ResultData> GetAllUser(UserEntity CurUserEntity);
+        public Task<ResultData> leaveInsert(string leaveEntity);
+        public Task<ResultData> leaveCheck(int user_id,string leaveEntity);
     }
 }

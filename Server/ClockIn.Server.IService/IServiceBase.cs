@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -31,9 +33,12 @@ namespace ClockIn.Server.IService
         int Delete<T>(IEnumerable<T> list) where T : class;
 
         #endregion
-        int Commit();//保证事务
         #region other
+        int Commit();//保证事务
 
+        //执行原生sql
+        int ExecuteNonQuery(string cmdText, CommandType cmdType = CommandType.Text, params DbParameter[] parameters);
+        IEnumerable<dynamic> ExecuteSqlQuery(string cmdText, CommandType cmdType = CommandType.Text, params DbParameter[] parameters);
         #endregion
     }
 }

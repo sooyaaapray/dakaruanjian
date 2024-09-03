@@ -4,6 +4,7 @@ using ClockIn.Server.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -71,7 +72,7 @@ namespace ClockIn.Server.Start.Controllers
         }
 
         [HttpPost("getuserById")]
-        public IActionResult updateUser([FromForm] string id)
+        public IActionResult getUser([FromForm] string id)
         {
             var user = _updateUserService.Query<SysUserInfo>(u => u.user_id == Convert.ToInt32(id));
             if (user?.Count() > 0)
@@ -88,41 +89,33 @@ namespace ClockIn.Server.Start.Controllers
         [HttpPost("deleteuserById")]
         public IActionResult deleteUser([FromForm] string id)
         {
-            var user = _updateUserService.Find<SysUserInfo>(Convert.ToInt32(id));
-            if (user != null) {
-                user.is_active = false;
-                _updateUserService.Update<SysUserInfo>(user);
-                return Ok(0);//删除成功
-            }
-            else
-            {
-                return Ok(0);//删除失败
-            }
+            int res = _updateUserService.deleteUserById(Convert.ToInt32(id));
+            return Ok(res);
+            
         }
 
-        [HttpPost("updateuser")]
-        public IActionResult updateUser([FromBody]SysUserInfo cuser)
+        [HttpPost("userupdatebyid")]
+        public IActionResult updateUser([FromForm] string user_json)
         {
-            int count = _updateUserService.UpdateUser(cuser);
-            if (count > 0)
-            {
-                return Ok(0);//更改成功
+            SysUserInfo si = JsonConvert.DeserializeObject<SysUserInfo>(user_json);
+            si.user_pwd = getMd5Str(getMd5Str(si.user_pwd) + "|" + si.user_login_name);//加盐计算
+            if (si != null) {
+                return Ok(_updateUserService.UpdateUser(si));
             }
-            else
-            {
-                return NoContent();
-            }
+            return Ok(0);
         }
 
         [HttpPost("insert")]
-        public IActionResult insertUser([FromBody]SysUserInfo cuser)
+        public IActionResult insertUser([FromForm]string user_json)
         {
-            var users = _updateUserService.GetAllUser();
-            if (users?.Count() > 0)
+            SysUserInfo si = JsonConvert.DeserializeObject<SysUserInfo>(user_json);
+            si.user_pwd = getMd5Str(getMd5Str(si.user_pwd) + "|" + si.user_login_name);//加盐计算
+
+            if (si != null)
             {
-                return Ok(users);
+                return Ok(_updateUserService.Insert(si));
             }
-            else
+            else 
             {
                 return NoContent();
             }

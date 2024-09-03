@@ -9,6 +9,6 @@ namespace ClockIn.Client.IDAL
 {
     public interface IGetAllEventsDAL
     {
-        Task<ResultData> getAllEvents();
+        Task<ResultData> getAllEvents(int user_id);
     }
 }

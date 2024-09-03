@@ -15,6 +15,7 @@ namespace ClockIn.Client.Entity
         public string User_login_name { get; set; }
         public string User_role { get; set; }
         public bool Is_admin { get; set; }
+        public bool Is_active { get; set; }
 
         public DateTime work_on { get; set; }
         public DateTime work_off { get; set; }

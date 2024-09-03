@@ -17,9 +17,12 @@ namespace ClockIn.Client.DAL
             _webDataBase = webDataBase;
         }
 
-        public Task<ResultData> getAllEvents()
+        public Task<ResultData> getAllEvents(int user_id)
         {
-            return _webDataBase.PostDatas("api/leave/CheckLeave", null);
+            Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
+            contents.Add("user_id", new StringContent(user_id.ToString()));
+
+            return _webDataBase.PostDatas("api/leave/getallevent", contents);
         }
     }
 }

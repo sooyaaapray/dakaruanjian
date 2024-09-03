@@ -8,5 +8,6 @@ namespace ClockIn.Client.BaseModule.CShows
 {
     public class CShowEvents
     {
+
     }
 }

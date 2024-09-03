@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ClockIn.Client.IBLL
 {
-    public interface IGetAllMessageBll
+    public interface ILeaveInsertBll
     {
-        Task<List<LeaveEntity>> getAllMessage(int user_id);
-        Task<List<LeaveEntity>> getMessageById(int user_id);
+        Task<int> leaveInsert(string leaveEntity);
+        Task<int> leaveCheck(int user_id, string leaveEntity);
     }
 }

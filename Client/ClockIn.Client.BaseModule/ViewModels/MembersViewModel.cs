@@ -15,9 +15,10 @@ using System.Windows.Media;
 
 namespace ClockIn.Client.BaseModule.ViewModels
 {
-    public class MembersViewModel:BindableBase
+    public class MembersViewModel:BindableBase, INavigationAware
     {
         IGetAllBll _getAllBll;
+        List<UserEntity> users;
         public ICommand addmember 
         {
             get => new DelegateCommand<object>(AddMember);
@@ -34,27 +35,49 @@ namespace ClockIn.Client.BaseModule.ViewModels
             //_eventAggregator=eventAggregator;
             _regionManager = regionManager;
             _getAllBll = getAllBll;
-            _members = new List<CShowUser>();
+            _members = new ObservableCollection<CShowUser>();
             LoadPage();
         }
-        public List<CShowUser> _members;
-        public List<CShowUser> members 
+        public ObservableCollection<CShowUser> _members;
+        public ObservableCollection<CShowUser> members 
         {
             get { return _members; }
             set
             {
                 _members = value;
-                SetProperty<List<CShowUser>>(ref _members,value);
+                SetProperty<ObservableCollection<CShowUser>>(ref _members,value);
             }
         }
         public ICommand ItemDeleteCommand
         {
             get => new DelegateCommand<object>(deleteItem);
         }
-        private void deleteItem(object obj)
+        private async void deleteItem(object obj)
         {
             //弹窗，根据id删除用户信息
-            _getAllBll.DeleteUserById(Convert.ToInt32(obj));
+            int id = Convert.ToInt32(obj);
+            int ress = await _getAllBll.DeleteUserById(id);
+            if (ress == 1) 
+            {
+                removeById(members,id);
+            }
+        }
+        private void removeById<T>(Collection<T> ts,int id) where T:UserEntity 
+        {
+            int l = ts[0].user_id, r = ts[ts.Count()-1].user_id;
+            while (l<=r) 
+            {
+                int m = l + (r - l) / 2;
+                if (ts[m].user_id == id) 
+                {
+                    ts.Remove(ts[m]);
+                    return;
+                }
+                if (ts[m].user_id > id)
+                    r = m - 1;
+                else
+                    l = m + 1;
+            }
         }
         public ICommand ItemUpdateCommand
         {
@@ -65,44 +88,48 @@ namespace ClockIn.Client.BaseModule.ViewModels
             //根据id查询该用户的所有信息，并将信息push到EventAggregator到跳转到update页
             UserEntity ue = await _getAllBll.GetUserById(Convert.ToInt32(obj));
             //_eventAggregator.GetEvent<SendEvent>().Publish(ue);
-            //暂考虑使用全局单例对象
-            UserForUpdate uf = UserForUpdate._user_instance();
-            uf.User_id = ue.user_id;
-            uf.User_name = ue.user_name;
-            uf.Is_admin = ue.is_admin;
-            uf.User_role = ue.user_role;
-            uf.User_ip_address = ue.user_ip_address;
-            uf.User_mac = ue.user_mac;
-            uf.eat_off = ue.eat_off;
-            uf.eat_on = ue.eat_on;
-            uf.work_off = ue.work_off;
-            uf.work_on = ue.work_on;
-            _regionManager.RequestNavigate("MainContentRegion", "UserUpdateView");
+            var nparams = new NavigationParameters();
+            nparams.Add("select_user",ue);
+            _regionManager.RequestNavigate("MainContentRegion", "UserUpdateView", nparams);
         }
         private async void LoadPage()
         {
             //加载数据
             var converter = new BrushConverter();
-            List<UserEntity> users= await _getAllBll.GetAll();
+            users= await _getAllBll.GetAll();
 
             foreach (var u in users) 
             {
                 CShowUser uu = new CShowUser();
-                uu.User_id = u.user_id;
-                uu.User_name = u.user_name;
-                uu.User_role = u.user_role;
-                uu.User_ip_address = u.user_ip_address;
-                uu.Tag = uu.User_role[0];
+                uu.user_id = u.user_id;
+                uu.user_name = u.user_name;
+                uu.user_role = u.user_role;
+                uu.user_ip_address = u.user_ip_address;
+                uu.tag = uu.user_role[0];
                 
-                switch (uu.User_role)
+                switch (uu.user_role)
                 {
-                    case "Boss": uu.bColor = (Brush)converter.ConvertFromString("#6741D9"); break;
-                    case "Management": uu.bColor = (Brush)converter.ConvertFromString("#FF8F00"); break;
-                    case "Employee": uu.bColor = (Brush)converter.ConvertFromString("#1E88E5"); break;
-                    default: uu.bColor = (Brush)converter.ConvertFromString("#1E88E5"); break;
+                    case "Boss": uu.bcolor = (Brush)converter.ConvertFromString("#6741D9"); break;
+                    case "Management": uu.bcolor = (Brush)converter.ConvertFromString("#FF8F00"); break;
+                    case "Employee": uu.bcolor = (Brush)converter.ConvertFromString("#1E88E5"); break;
+                    default: uu.bcolor = (Brush)converter.ConvertFromString("#1E88E5"); break;
                 }
                 members.Add(uu);
             }
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return false;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
             
         }
     }

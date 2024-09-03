@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ClockIn.Client.IBLL
 {
-    public interface IGetAllMessageBll
+    public interface IUpdateUserInfoBll
     {
-        Task<List<LeaveEntity>> getAllMessage(int user_id);
-        Task<List<LeaveEntity>> getMessageById(int user_id);
+        public Task<int> UpdateUserInfo(string user_select);
+        public Task<UserEntity> insertUser(string user);
     }
 }

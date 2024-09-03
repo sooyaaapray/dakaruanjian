@@ -16,12 +16,12 @@
                 <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid>
-                <TextBlock Text="Message" FontSize="32" FontWeight="SemiBold" Margin="40 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBlock Text="请假申请" FontSize="32" FontWeight="SemiBold" Margin="40 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
 
-                <ToggleButton x:Name="TogglePopupButton" Style="{StaticResource AddButton}">
+                <ToggleButton Command="{Binding leaveAdd}" Style="{StaticResource AddButton}">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                        <TextBlock Text="Add New Members"/>
+                        <TextBlock Text="Add New Leaving"/>
 
                     </StackPanel>
                 </ToggleButton>
@@ -49,8 +49,13 @@
                                     Margin="319,0,0,0" Foreground="#b0b9c6" Grid.Column="1"/>
             </Grid>
             <!--Data Grid-->
-            <DataGrid Grid.Row="2" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
-           x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+            <DataGrid Grid.Row="2"
+                      ItemsSource="{Binding leavess}"
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      Style="{DynamicResource DataGridStyle1}" 
+                      Margin="9,10,-9,0">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                         <DataGridCheckBoxColumn.HeaderTemplate>
@@ -59,7 +64,7 @@
                             </DataTemplate>
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
-                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding User_id}"/>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding leave_id}"/>
                     <DataGridTemplateColumn Header="Name"  IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -68,13 +73,13 @@
                                         <TextBlock Text="{Binding Tag}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                     </Border>
 
-                                    <TextBlock Text="{Binding User_name}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding user_name}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Role" Binding="{Binding User_role}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Leader" Binding="{Binding User_role}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="持续时间" Binding="{Binding during_time}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="审批人" Binding="{Binding approval_by}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

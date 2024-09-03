@@ -36,16 +36,16 @@ namespace ClockIn.Server.Models
         public bool is_active { get; set; }
 
         [Column("work_on")]
-        public DateTime work_on { get; set; }
+        public TimeOnly work_on { get; set; }
 
         [Column("work_off")]
-        public DateTime work_off { get; set; }
+        public TimeOnly work_off { get; set; }
 
         [Column("eat_on")]
-        public DateTime eat_on { get; set; }
+        public TimeOnly eat_on { get; set; }
 
-        [Column("eat off")]
-        public DateTime eat_off { get; set; }
+        [Column("eat_off")]
+        public TimeOnly eat_off { get; set; }
 
         [NotMapped]
         public List<MenuInfo> menus { get; set; }

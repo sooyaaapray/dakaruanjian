@@ -1,5 +1,6 @@
 
 using ClockIn.Server.Service;
+using ClockIn.Server.Start.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,13 @@ builder.Services.AddTransient<ClockIn.Server.IService.IClockInService, ClockIn.S
 builder.Services.AddTransient<ClockIn.Server.IService.ILeaveService, ClockIn.Server.Service.LeaveService>();
 builder.Services.AddTransient<ClockIn.Server.IService.ICheckService, ClockIn.Server.Service.CheckService>();
 builder.Services.AddTransient<ClockIn.Server.IService.IUpdateUserService, ClockIn.Server.Service.UpdateUserService>();
+builder.Services.AddTransient<ClockIn.Server.IService.ILeaveService, ClockIn.Server.Service.LeaveService>();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new DateOnlyConverter());
+    options.JsonSerializerOptions.Converters.Add(new TimeOnlyConverter());
+});
 builder.Services.AddControllers();
 
 var app = builder.Build();

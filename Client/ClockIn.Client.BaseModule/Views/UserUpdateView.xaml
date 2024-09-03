@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="用户名:" VerticalAlignment="Center" x:Name="user_name_update" Style="{StaticResource textupdateHint}" Margin="10,0,0,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding UserForUpdate.User_name}" Height="40" Margin="10,0,0,0"/>
+                        <TextBox Grid.Column="1" Text="{Binding UserForUpdate.user_name}" Height="40" Margin="10,0,0,0"/>
                     </Grid>
 
                     <Grid Margin="7 9">
@@ -40,14 +40,13 @@
                         <TextBlock Text="用户密码:" VerticalAlignment="Center" x:Name="user_pwd_update" Style="{StaticResource textupdateHint}"/>
                         <TextBox Grid.Column="1" x:Name="user_pwd_update_box" Height="40" Margin="10,0,0,0"/>
                     </Grid>
-
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="IP:" VerticalAlignment="Center" x:Name="user_ip_update" Style="{StaticResource textupdateHint}"/>
-                        <TextBox Grid.Column="1" x:Name="user_ip_update_box" Height="40" Margin="10,0,0,0"/>
+                        <TextBox Grid.Column="1" Text="{Binding UserForUpdate.user_ip_address}" Height="40" Margin="10,0,0,0"/>
                     </Grid>
 
 
@@ -56,8 +55,9 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="MAC:" VerticalAlignment="Center"  x:Name="user_mac_update" Style="{StaticResource textupdateHint}"/>
-                        <TextBox Grid.Column="1" x:Name="user_mac_update_box" Height="40" Margin="10,0,0,0"/>
+                        <TextBlock Text="MAC:" VerticalAlignment="Center"
+                                   Style="{StaticResource textupdateHint}"/>
+                        <TextBox Grid.Column="1" Text="{Binding UserForUpdate.user_mac}" Height="40" Margin="10,0,0,0"/>
                     </Grid>
 
                 </StackPanel>
@@ -70,8 +70,8 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="登录名:" VerticalAlignment="Center" x:Name="user_logname_update" Style="{StaticResource textupdateHint}"/>
-                        <TextBox Grid.Column="1" Height="40" x:Name="user_logname_update_box" Margin="10,0,0,0"/>
+                        <TextBlock Text="登录名:" VerticalAlignment="Center" Style="{StaticResource textupdateHint}"/>
+                        <TextBox Grid.Column="1" Height="40" Text="{Binding UserForUpdate.user_login_name}" Margin="10,0,0,0"/>
                     </Grid>
 
 
@@ -80,11 +80,8 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="角色:" VerticalAlignment="Center" x:Name="user_role_update" Style="{StaticResource textupdateHint}"/>
-                        <ComboBox x:Name="user_role_update_box" Grid.Column="1" Height="40" Margin="10,0,0,0">
-                            <ComboBoxItem Content="管理员"/>
-                            <ComboBoxItem Content="员工" IsSelected="True"/>
-                        </ComboBox>
+                        <TextBlock Text="角色:" VerticalAlignment="Center" Style="{StaticResource textupdateHint}"/>
+                        <ComboBox ItemsSource="{Binding userRole}" SelectedItem="{Binding userRoleSelect}" Grid.Column="1" Height="40" Margin="10,0,0,0"/>
                     </Grid>
 
                     <Grid Margin="7 9">
@@ -93,10 +90,7 @@
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="管理员:" VerticalAlignment="Center" x:Name="user_isadmin_update" Style="{StaticResource textupdateHint}"/>
-                        <ComboBox x:Name="user_isadmin_update_box" Grid.Column="1" Height="40" Margin="10,0,0,0">
-                            <ComboBoxItem Content="是"/>
-                            <ComboBoxItem Content="否" IsSelected="True"/>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding isAdministrtor}" SelectedItem="{Binding isAdministrtorSelect}" Grid.Column="1" Height="40" Margin="10,0,0,0"/>
                     </Grid>
 
 
@@ -106,12 +100,8 @@
                             <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="在职:" VerticalAlignment="Center" x:Name="user_active_update" Style="{StaticResource textupdateHint}"/>
-                        <ComboBox x:Name="user_isactive_update_box" Grid.Column="1" Height="40" Margin="10,0,0,0">
-                            <ComboBoxItem Content="是"/>
-                            <ComboBoxItem Content="否" IsSelected="True"/>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding isWork}" SelectedItem="{Binding isWorkSelect}" Grid.Column="1" Height="40" Margin="10,0,0,0"/>
                     </Grid>
-
                 </StackPanel>
             </Border>
         </Grid>
@@ -130,7 +120,7 @@
 
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock Text="开始吃饭打卡:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <ui:TimePicker />
+                    <ui:TimePicker/>
                     <TextBlock Text="结束吃饭打卡:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <ui:TimePicker />
                 </StackPanel>
@@ -138,8 +128,8 @@
         </Grid>
         <Border Grid.Row="3">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <Button Content="取消"/>
-                <Button Content="保存"/>
+                <Button Content="取消" Command="{Binding Cancel}"/>
+                <Button Content="保存" Command="{Binding Save}"/>
             </StackPanel>
         </Border>
     </Grid>

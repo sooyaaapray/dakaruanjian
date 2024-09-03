@@ -20,10 +20,10 @@
         public string user_login_name { get; set; }
         public bool is_admin { get; set; }
         public bool is_active { get; set; }
-        public DateTime work_on { get; set; }
-        public DateTime work_off { get; set; }
-        public DateTime eat_on { get; set; }
-        public DateTime eat_off { get; set; }
+        public TimeOnly work_on { get; set; }
+        public TimeOnly work_off { get; set; }
+        public TimeOnly eat_on { get; set; }
+        public TimeOnly eat_off { get; set; }
         public List<MenuEntity> menus {get;set;}
     }
 }

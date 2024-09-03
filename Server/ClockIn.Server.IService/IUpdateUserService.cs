@@ -11,6 +11,8 @@ namespace ClockIn.Server.IService
     {
         List<Models.SysUserInfo> GetAllUser();
 
-        int UpdateUser(Models.SysUserInfo userInfo);
+        int UpdateUser(SysUserInfo user);
+
+        int deleteUserById(int id);
     }
 }

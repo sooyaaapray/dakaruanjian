@@ -1,5 +1,9 @@
-﻿using ClockIn.Client.IBLL;
+﻿using ClockIn.Client.BaseModule.CShows;
+using ClockIn.Client.BLL;
+using ClockIn.Client.Entity;
+using ClockIn.Client.IBLL;
 using Prism.Mvvm;
+using System.Windows.Media;
 
 
 namespace ClockIn.Client.BaseModule.ViewModels
@@ -12,10 +16,17 @@ namespace ClockIn.Client.BaseModule.ViewModels
 
         }
 
-        private void LoadPage()
+        private async void LoadPage()
         {
-            _getAllEventsBll.getAllEvents();
             //加载数据
+            CLoginUser curr_user = CLoginUser._user_instance();
+            if (curr_user != null)
+            {
+                var converter = new BrushConverter();
+                
+            }
+            throw new Exception("");
+
         }
     }
 }

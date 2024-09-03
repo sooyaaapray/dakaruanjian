@@ -16,15 +16,8 @@
                 <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid>
-                <TextBlock Text="Events" FontSize="32" FontWeight="SemiBold" Margin="40 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
-
-                <ToggleButton x:Name="TogglePopupButton" Style="{StaticResource AddButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                        <TextBlock Text="Add New Members"/>
-
-                    </StackPanel>
-                </ToggleButton>
+                <TextBlock Text="审批" FontSize="32" FontWeight="SemiBold" Margin="40 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
+                
                 <Separator Background="#dae2ea" Margin="0,98,0,-50" RenderTransformOrigin="0.5,0.5" >
                     <Separator.RenderTransform>
                         <TransformGroup>

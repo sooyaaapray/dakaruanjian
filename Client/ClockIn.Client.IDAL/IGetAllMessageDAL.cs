@@ -9,6 +9,7 @@ namespace ClockIn.Client.IDAL
 {
     public interface IGetAllMessageDAL
     {
-        Task<ResultData> getAllMessage();
+        Task<ResultData> getAllMessage(int user_id);
+        Task<ResultData> getMessageById(int user_id);
     }
 }

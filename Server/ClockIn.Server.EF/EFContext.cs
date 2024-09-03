@@ -16,6 +16,11 @@ namespace ClockIn.Server.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<SysUserInfo>().Property(p => p.eat_off).HasColumnType("time(0)");
+            //modelBuilder.Entity<SysUserInfo>().Property(p => p.eat_on).HasColumnType("time(0)");
+            //modelBuilder.Entity<SysUserInfo>().Property(p => p.work_off).HasColumnType("time(0)");
+            //modelBuilder.Entity<SysUserInfo>().Property(p => p.work_off).HasColumnType("time(0)");
+            
             /*ValueConverter iconValueConverter = new ValueConverter<string, string>
                 (
                  v => string.IsNullOrEmpty(v) ? null : ((int)v.ToCharArray()[0]).ToString("x"),

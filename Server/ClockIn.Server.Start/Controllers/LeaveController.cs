@@ -3,11 +3,12 @@ using ClockIn.Server.Models;
 using ClockIn.Server.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using static ClockIn.Server.Models.ClockInState;
 
 namespace ClockIn.Server.Start.Controllers
 {
-    [Authorize()]
+    //[Authorize()]
     [Route("api/[controller]")]
     [ApiController]
     public class LeaveController : ControllerBase
@@ -39,10 +40,23 @@ namespace ClockIn.Server.Start.Controllers
             return NoContent();
         }
 
-        [HttpPost("AskForLeave")]
-        public IActionResult AskForLeave()
+        [HttpPost("getLeavebyid")]
+        public IActionResult getAllLeaveById([FromForm] string user_id)
         {
-            _leaveService.Leave(null);
+            List<LeaveCheckInfo> leaveCheckInfos = _checkService.getAllLeaveById(Convert.ToInt32(user_id));
+            if (leaveCheckInfos.Count > 0) {
+                return Ok(leaveCheckInfos);
+            }
+            return NoContent();
+        }
+
+        [HttpPost("AskForLeave")]
+        public IActionResult AskForLeave([FromForm] string leaveEntity)
+        {
+            LeaveCheckInfo leaveCheckInfo = JsonConvert.DeserializeObject<LeaveCheckInfo>(leaveEntity);
+            leaveCheckInfo.updated_at = System.DateTime.Now;
+            leaveCheckInfo.created_at = System.DateTime.Now;
+            _leaveService.Leave(leaveCheckInfo);
             return NoContent();
         }
         //请假 LeaveService

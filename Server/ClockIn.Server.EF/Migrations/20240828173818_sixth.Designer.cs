@@ -3,6 +3,7 @@ using System;
 using ClockIn.Server.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClockIn.Server.EF.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20240828173818_sixth")]
+    partial class sixth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,8 +89,8 @@ namespace ClockIn.Server.EF.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("created_at");
 
-                    b.Property<DateOnly>("end_at")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("end_at")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("end_at");
 
                     b.Property<string>("reason")
@@ -96,8 +98,8 @@ namespace ClockIn.Server.EF.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("reason");
 
-                    b.Property<DateOnly>("start_at")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("start_at")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("start_at");
 
                     b.Property<DateTime>("updated_at")
@@ -159,12 +161,12 @@ namespace ClockIn.Server.EF.Migrations
                         .HasColumnType("int")
                         .HasColumnName("user_id");
 
-                    b.Property<TimeOnly>("eat_off")
-                        .HasColumnType("time(6)")
+                    b.Property<DateTime>("eat_off")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("eat_off");
 
-                    b.Property<TimeOnly>("eat_on")
-                        .HasColumnType("time(6)")
+                    b.Property<DateTime>("eat_on")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("eat_on");
 
                     b.Property<bool>("is_active")
@@ -205,12 +207,12 @@ namespace ClockIn.Server.EF.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("user_role");
 
-                    b.Property<TimeOnly>("work_off")
-                        .HasColumnType("time(6)")
+                    b.Property<DateTime>("work_off")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("work_off");
 
-                    b.Property<TimeOnly>("work_on")
-                        .HasColumnType("time(6)")
+                    b.Property<DateTime>("work_on")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("work_on");
 
                     b.HasKey("user_id");

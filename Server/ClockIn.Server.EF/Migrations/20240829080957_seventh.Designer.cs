@@ -3,6 +3,7 @@ using System;
 using ClockIn.Server.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClockIn.Server.EF.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20240829080957_seventh")]
+    partial class seventh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,8 +89,8 @@ namespace ClockIn.Server.EF.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("created_at");
 
-                    b.Property<DateOnly>("end_at")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("end_at")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("end_at");
 
                     b.Property<string>("reason")
@@ -96,8 +98,8 @@ namespace ClockIn.Server.EF.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("reason");
 
-                    b.Property<DateOnly>("start_at")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("start_at")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("start_at");
 
                     b.Property<DateTime>("updated_at")

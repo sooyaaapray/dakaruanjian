@@ -14,6 +14,9 @@ namespace ClockIn.Server.Models
         [Column("user_id")]
         public int user_id { get; set; }
 
+        [NotMapped]
+        public string user_name { get; set; }
+
         [Column("reason_type", TypeName = "tinyint")]
         reason_type _reason_type { get; set; }
 
@@ -27,10 +30,10 @@ namespace ClockIn.Server.Models
         public DateTime created_at { get; set; }
 
         [Column("start_at")]
-        public DateTime start_at { get; set; }
+        public DateOnly start_at { get; set; }
 
         [Column("end_at")]
-        public DateTime end_at { get; set; }
+        public DateOnly end_at { get; set; }
 
         [Column("updated_at")]
         public DateTime updated_at { get; set; }

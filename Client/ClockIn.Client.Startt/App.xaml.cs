@@ -13,6 +13,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using Prism.Unity;
 using System.Configuration;
 using System.Data;
@@ -42,9 +43,7 @@ namespace ClockIn.Client.Startt
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //containerRegistry.Register<NotificationContainer, NotificationContainer>();
-            containerRegistry.Register<IEventAggregator, EventAggregator>();
-
-
+            //containerRegistry.Register<IEventAggregator, EventAggregator>();
 
             containerRegistry.Register<IWebDataBase, WebDataBase>();
             containerRegistry.Register<ILoginDAL, LoginDAL>();
@@ -52,13 +51,17 @@ namespace ClockIn.Client.Startt
             containerRegistry.Register<IGetAllDAL, GetAllDAL>();
             containerRegistry.Register<IGetAllEventsDAL, GetAllEventsDAL>();
             containerRegistry.Register<IGetAllMessageDAL, GetAllMessageDAL>();
+            containerRegistry.Register<IUserUpdateDAL, UserUpdateDAL>();
+            containerRegistry.Register<ILeaveInsertDAL, LeaveInsertDAL>();
 
 
+            containerRegistry.Register<ILoginBll, LoginBll>();
+            containerRegistry.Register<ILeaveInsertBll, LeaveInsertBll>();
+            containerRegistry.Register<IUpdateUserInfoBll, UpdateUserInfoBll>();
             containerRegistry.Register<IGetAllBll, GetAllBll>();
             containerRegistry.Register<IGetAllEventsBll, GetAllEventsBll>();
             containerRegistry.Register<IGetAllMessageBll, GetAllMessageBll>();
             containerRegistry.Register<IClockInBll, ClockInBll>();
-            containerRegistry.Register<ILoginBll, LoginBll>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -75,8 +78,6 @@ namespace ClockIn.Client.Startt
             ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
             ViewModelLocationProvider.Register<LeftMeunView, LeftMenuViewModel>();
             ViewModelLocationProvider.Register<UserInfoView, UserInfoViewModel>();
-
-
         }
     }
 

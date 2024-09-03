@@ -60,34 +60,34 @@
                             </DataTemplate>
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
-                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding User_id}"/>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding user_id}"/>
                     <DataGridTemplateColumn Header="用户名"  IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding bColor}">
-                                        <TextBlock Text="{Binding Tag}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding bcolor}">
+                                        <TextBlock Text="{Binding tag}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                     </Border>
 
-                                    <TextBlock Text="{Binding User_name}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding user_name}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="角色" Binding="{Binding User_role}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="IP" Binding="{Binding User_ip_address}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="角色" Binding="{Binding user_role}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="IP" Binding="{Binding user_ip_address}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource gridEditButton}"
                                             Command="{Binding DataContext.ItemUpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
-                                            CommandParameter="{Binding User_id}">
+                                            CommandParameter="{Binding user_id}">
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                     <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
                                             Command="{Binding DataContext.ItemDeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
-                                            CommandParameter="{Binding User_id}">
+                                            CommandParameter="{Binding user_id}">
                                         <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

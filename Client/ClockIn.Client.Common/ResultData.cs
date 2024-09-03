@@ -7,7 +7,7 @@ namespace ClockIn.Client.Common
     {
         public ResultData(string resultData, HttpStatusCode statusCode)
         {
-            _resultData= resultData; ;
+            _resultData= resultData;
             _statusCode = statusCode;
         }
 

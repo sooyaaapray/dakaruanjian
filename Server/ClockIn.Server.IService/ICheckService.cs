@@ -10,6 +10,7 @@ namespace ClockIn.Server.IService
     public interface ICheckService:IServiceBase
     {
         public List<LeaveCheckInfo> getAllLeaveInfo();
+        public List<LeaveCheckInfo> getAllLeaveById(int user_id);
         public int approve(LeaveCheckInfo leaveCheckInfo);
     }
 }

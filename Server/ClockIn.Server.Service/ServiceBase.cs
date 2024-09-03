@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
+using System.Data;
+using System.Dynamic;
 using System.Linq.Expressions;
 
 namespace ClockIn.Server.Service
@@ -81,6 +84,64 @@ namespace ClockIn.Server.Service
             return this.Commit();
         }
 
+        public IEnumerable<dynamic> ExecuteSqlQuery(string cmdText, CommandType cmdType = CommandType.Text, params DbParameter[] parameters)
+        {
+            using (var cmd = this.Context.Database.GetDbConnection().CreateCommand())
+            {
+                cmd.CommandText = cmdText;
+                cmd.CommandType = cmdType;
+                if (cmd.Connection.State != ConnectionState.Open)
+                {
+                    cmd.Connection.Open(); //打开连接
+                }
+                //添加输入参数
+                cmd.Parameters.AddRange(parameters);
+
+                //执行命令，读取器读取数据
+                using (var dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        IDictionary<string, object> row = new ExpandoObject(); //实例化一个动态可扩展对象
+                        for (int i = 0; i < dataReader.FieldCount; i++)
+                        {
+                            row.Add(dataReader.GetName(i), dataReader[i]);
+                        }
+                        yield return row;
+                    }
+                }
+            }
+        }
+
+        public int ExecuteNonQuery(string cmdText, CommandType cmdType = CommandType.Text, params DbParameter[] parameters)
+        {
+            //1. 创建连接对象
+            using (var cmd = this.Context.Database.GetDbConnection().CreateCommand())
+            {
+                //接下来把异常处理加入
+                try
+                {
+                    cmd.CommandText = cmdText;
+                    cmd.CommandType = cmdType;
+                    if (cmd.Connection.State != ConnectionState.Open)
+                    {
+                        cmd.Connection.Open(); //打开连接
+                    }
+                    //处理输入参数
+                    cmd.Parameters.AddRange(parameters);
+
+                    //事务
+                    //cmd.Transaction = tran; 
+
+                    int result = cmd.ExecuteNonQuery();   //执行增删改命令
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
         public virtual void Dispose() 
         {
             if (this.Context != null) 

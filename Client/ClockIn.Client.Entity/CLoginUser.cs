@@ -16,10 +16,10 @@ namespace ClockIn.Client.Entity
         public string User_role { get; set; }
         public bool Is_admin { get; set; }
 
-        public DateTime work_on { get; set; }
-        public DateTime work_off { get; set; }
-        public DateTime eat_on { get; set; }
-        public DateTime eat_off { get; set; }
+        public TimeOnly work_on { get; set; }
+        public TimeOnly work_off { get; set; }
+        public TimeOnly eat_on { get; set; }
+        public TimeOnly eat_off { get; set; }
 
         public List<MenuEntity> menus { get; set; }
 

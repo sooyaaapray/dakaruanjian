@@ -26,12 +26,20 @@ namespace ClockIn.Client.DAL
             return _webDataBase.PostDatas("api/user/getalluser", contents);
         }
 
-        public Task<ResultData> UpdateInfo(UserEntity TargetUserEntity, UserEntity CurUserEntity)
+        public Task<ResultData> insertUser(string user)
         {
             Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
-            contents.Add("is_admin", new StringContent(CurUserEntity.is_admin.ToString()));
+            contents.Add("user_json", new StringContent(user));
 
-            return _webDataBase.PostDatas("api/user/userupdate", contents);
+            return _webDataBase.PostDatas("api/user/insert", contents);
+        }
+
+        public Task<ResultData> UpdateInfo(string user_select)
+        {
+            Dictionary<string, HttpContent> contents = new Dictionary<string, HttpContent>();
+            contents.Add("user_json", new StringContent(user_select));
+
+            return _webDataBase.PostDatas("api/user/userupdatebyid", contents);
         }
     }
 }

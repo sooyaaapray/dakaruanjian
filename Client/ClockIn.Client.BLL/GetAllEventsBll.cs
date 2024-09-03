@@ -18,7 +18,8 @@ namespace ClockIn.Client.BLL
         }
         public Task<ResultData> getAllEvents()
         {
-           return _getAllEventsDAL.getAllEvents();
+            return null;
+           //return _getAllEventsDAL.getAllEvents();
         }
     }
 }
